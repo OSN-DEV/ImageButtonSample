@@ -1,0 +1,57 @@
+﻿<Window x:Class="ImageButtonSample.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ImageButtonSample"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="350" Width="525">
+    
+    <Window.Resources>
+        <!-- http://dev.eyewhale.com/archives/824 -->
+        <BitmapImage x:Key="DefaultImage" UriSource="images/default.jpg" />
+        <Style TargetType="{x:Type local:ImageButton}" BasedOn="{StaticResource {x:Type Button}}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate  TargetType="Button">
+                        <Border Name="border" BorderThickness="0" BorderBrush="Transparent">
+                            <Border.Background>
+                                <!--<ImageBrush ImageSource="{TemplateBinding DefaultImage}" />-->
+                                <ImageBrush ImageSource="{Binding Path=DefaultImage, RelativeSource={RelativeSource TemplatedParent}}" />
+                            </Border.Background>
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <!-- IsPressd, IsMouseOverの順に定義するとIsPressedが機能しない -->
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="border" Property="Background" >
+                                    <Setter.Value>
+                                        <ImageBrush ImageSource="{Binding Path=HoverImage, RelativeSource={RelativeSource TemplatedParent}}" />
+                                    </Setter.Value>
+                                </Setter>
+                                <Setter Property="Cursor" Value="Hand" />
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter TargetName="border" Property="Background"  >
+                                    <Setter.Value>
+                                        <ImageBrush ImageSource="{Binding Path=PressedImage, RelativeSource={RelativeSource TemplatedParent}}" />
+                                    </Setter.Value>
+                                </Setter>
+                                <Setter Property="Cursor" Value="Hand" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition  />
+        </Grid.RowDefinitions>
+
+        <local:ImageButton Grid.Row="0"  Width="100" Height="100" DefaultImage="images/default.jpg" HoverImage="images/hover.jpg" PressedImage="images/pressed.jpg"/>
+
+    </Grid>
+</Window>
