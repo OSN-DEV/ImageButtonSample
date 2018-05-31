@@ -1,0 +1,11 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                     xmlns:sys="clr-namespace:System;assembly=mscorlib">
+
+    <BitmapImage x:Key="IconDefault" UriSource="default.jpg" />
+    <BitmapImage x:Key="IconHover" UriSource="hover.jpg" />
+    <BitmapImage x:Key="IconPressed" UriSource="pressed.jpg" />
+    <BitmapImage x:Key="IconDisabled" UriSource="disabled.jpg" />
+
+</ResourceDictionary>
+    
